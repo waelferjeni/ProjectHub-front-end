@@ -1,0 +1,105 @@
+<div style="margin: 15px;">
+    <form [formGroup]="editSprint" (ngSubmit)="submit()">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Sprint</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class=" justify-content-center">
+                                <div class="card ">
+
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">General Information</p>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Name</label>
+                                                    <input class="form-control" type="text" formControlName="sprintName">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Current State</label>
+                                                    <select class="form-select ms-auto" aria-label="Default select example" formControlName="sprintState">
+                                                        <option  value="0" > To Do </option>
+                                                        <option  value="1" > In Progress </option>
+                                                        <option  value="2" > Done </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <!-- <p class="text-uppercase text-sm">Estimated Duration</p> -->
+                                                    <label for="example-text-input" class="form-control-label">Days</label>
+                                                    <input class="form-control" type="number" min="0" formControlName="days">
+                                                    <div *ngIf="f['days'].touched && f['days'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['days'].errors!['required']">* This field is required.</div>
+                                                        <div *ngIf="f['days'].errors!['max'] || f['days'].errors!['min'] ">* Please enter a value between 7 and 15.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- <hr class="horizontal dark">
+
+                                        <p class="text-uppercase text-sm">Dates</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">End Date </label>
+                                                    <input class="form-control" type="datetime-local" formControlName="endDate">
+                                                </div>
+                                            </div>
+
+                                        </div> -->
+                                        <!-- <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">UserStories</p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="checkbox" value="" id="UserStory" checked>
+                                                    <label class="form-check-label" for="UserStory">
+                                                    UserStory 1
+                                                </label><br>
+                                                    <input type="checkbox" value="" id="UserStory" checked>
+                                                    <label class="form-check-label" for="UserStory">
+                                                    UserStory 2
+                                                </label><br>
+                                                    <input type="checkbox" value="" id="UserStory" checked>
+                                                    <label class="form-check-label" for="UserStory">
+                                                    UserStory 3
+                                                </label>
+                                                </div>
+                                            </div>
+
+                                        </div> -->
+                                        <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">Description </p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" formControlName="description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style="margin: 7px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">Close</button>
+                    <button style="margin: 7px;" type="submit" class="btn btn-primary" [disabled]="!editSprint.valid">Confirm </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

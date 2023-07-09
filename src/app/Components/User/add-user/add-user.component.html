@@ -1,0 +1,97 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            </div>
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class=" justify-content-center">
+                                <div class="card ">
+
+
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">General Information</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['firstName'].dirty && addForm.hasError('required','firstName')">
+                                                    <label for="example-text-input" class="form-control-label">first Name</label>
+                                                    <input formControlName="firstName" class="form-control" type="text">
+                                                </div>
+                                                <small *ngIf="addForm.controls['firstName'].dirty && addForm.hasError('required','firstName')" class="text-danger">*firstName is required</small>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['lastName'].dirty && addForm.hasError('required','lastName')">
+                                                    <label for="example-text-input" class="form-control-label">last Name</label>
+                                                    <input formControlName="lastName" class="form-control" type="text">
+                                                </div>
+                                                <small *ngIf="addForm.controls['lastName'].dirty && addForm.hasError('required','lastName')" class="text-danger">*lastName is required</small>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['userName'].dirty && addForm.hasError('required','userName')">
+                                                    <label for="example-text-input" class="form-control-label">user Name</label>
+                                                    <input formControlName="userName" class="form-control" type="text">
+                                                </div>
+                                                <small *ngIf="addForm.controls['userName'].dirty && addForm.hasError('required','userName')" class="text-danger">*userName is required</small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['email'].dirty && addForm.hasError('required','email')">
+                                                    <label for="example-text-input" class="form-control-label">email</label>
+                                                    <input formControlName="email" class="form-control" type="text">
+                                                </div>
+                                                <small *ngIf="addForm.controls['email'].dirty && addForm.hasError('required','email')" class="text-danger">*email is required</small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['password'].dirty && addForm.hasError('required','password')">
+                                                    <label for="example-text-input" class="form-control-label">password</label>
+                                                    <input formControlName="password" class="form-control" type="text">
+                                                </div>
+                                                <small *ngIf="addForm.controls['password'].dirty && addForm.hasError('required','password')" class="text-danger">*password is required</small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['role'].dirty && addForm.hasError('required','role')">
+                                                    <label for="example-text-input" class="form-control-label">Role</label>
+                                                    <select class="form-select ms-auto" aria-label="Default select example" formControlName="role">
+                                                    <option value="Employee" >Employee</option>
+                                                    <option value="serviceLeader" >Service Manager</option>
+                                                    <option value="independentEmployee" >Independent Employee</option>
+                                                </select>
+                                                </div>
+                                                <small *ngIf="addForm.controls['role'].dirty && addForm.hasError('required','role')" class="text-danger">*role is required</small>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" [class.error]="addForm.controls['serviceId'].dirty && addForm.hasError('required','serviceId')">
+                                                    <label for="example-text-input" class="form-control-label">Service</label>
+                                                    <select (change)="checkService($event)" class="form-select ms-auto" aria-label="Default select example" formControlName="serviceId">
+                                                    <option *ngFor="let service of services" value="{{service.id}}">{{service.name}}</option>
+                                                </select>
+                                                </div>
+                                                <small *ngIf="addForm.controls['serviceId'].dirty && addForm.hasError('required','serviceId')" class="text-danger">*service is required</small>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">Close</button>
+                    <button style="margin-left: 5px;" type="submit" class="btn btn-primary">Confirm </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

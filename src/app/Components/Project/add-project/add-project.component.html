@@ -1,0 +1,103 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
+            </div>
+            <form [formGroup]="addForm" (ngSubmit)="submit()">
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class=" justify-content-center">
+                                <div class="card ">
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">General Information</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Name</label>
+                                                    <input formControlName="name" class="form-control" type="text">
+                                                    <div *ngIf="f['name'].touched && f['name'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['name'].errors!['required']">* This field is required.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Client Name</label>
+                                                    <input formControlName="clientName" class="form-control" type="text">
+                                                    <div *ngIf="f['clientName'].touched && f['clientName'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['clientName'].errors!['required']">* This field is required.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Team</label>
+                                                    <select class="form-select ms-auto" aria-label="Default select example" formControlName="team" (change)="getProjectLeader($event)">
+                                                    <option *ngFor="let team of teams" value=" {{team.id}} " > {{team.name}} </option>
+                                                </select>
+                                                    <div *ngIf="f['team'].touched && f['team'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['team'].errors!['required']">* Please select a team.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                        </div>
+                                        <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">Estimated Duration</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Days</label>
+                                                    <input class="form-control" formControlName="days" type="number" value="0">
+                                                    <div *ngIf="f['days'].touched && f['days'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['days'].errors!['required']">* This field is required.</div>
+                                                        <div *ngIf="f['days'].errors!['min'] ">* Please enter a value greater than or equal to 0.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Hours</label>
+                                                    <input class="form-control" formControlName="hours" type="number" value="0" min="0" max="23">
+                                                    <div *ngIf="f['hours'].touched && f['hours'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['hours'].errors!['required']">* This field is required.</div>
+                                                        <div *ngIf="f['hours'].errors!['max'] || f['hours'].errors!['min'] ">* Please enter a value between 0 and 23.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">Description </p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" value="" formControlName="description">
+                                                    <div *ngIf="f['description'].touched && f['description'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div *ngIf="f['description'].errors!['required']">* This field is required.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+                    <button style="margin-left: 5px;" type="submit" [disabled]="!addForm.valid" class="btn btn-primary">Confirm </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

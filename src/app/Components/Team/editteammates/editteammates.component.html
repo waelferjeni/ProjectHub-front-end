@@ -1,0 +1,78 @@
+<div style="margin: 15px;">
+    <form [formGroup]="editTeammates">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Team</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class="justify-content-center">
+                                <div class="card">
+                                    <div class="card-header pb-0">
+                                        <div class="d-flex align-items-center">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <p class="text-uppercase text-sm">Selected Teammates</p>
+                                        <div *ngFor="let user of usersSelected">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="checkbox" [value]="user.id" (change)="removeUser(user)" checked/>
+                                                        <label class="form-check-label" for="UserStory">
+                            {{ user.userName }} </label
+                          ><br />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card-body">
+
+                <p class="text-uppercase text-sm">Select Teammates</p>
+                <div *ngFor="let user of removerLeaderFromList()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="checkbox" [value]="user.id" (change)="addUser(user)" />
+                                <label class="form-check-label" for="UserStory">
+    {{ user.userName }} </label
+  ><br />
+</div>
+</div>
+</div>
+</div>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="refresh()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+(click)="refresh()"
+          
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+</form>
+</div>

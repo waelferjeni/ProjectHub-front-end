@@ -1,0 +1,83 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> User Details</h5>
+
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid py-4">
+                    <div class="row">
+                        <div class=" justify-content-center">
+                            <div class="card ">
+
+
+                                <div class="card-body">
+                                    <p class="text-uppercase text-sm">General Information</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">first Name</label>
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{user.firstName}} </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">last Name</label>
+                                                <p class="text-sm" style="margin-left: 5px;"> {{user.lastName}} </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">user Name</label>
+
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{user.userName}} </p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">email</label>
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{user.email}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Role</label>
+
+                                                <div [ngSwitch]="user.role">
+                                                    <p class="text-sm" style="margin-left: 5px;" *ngSwitchCase="'independentEmployee'"> Independent Employee</p>
+                                                    <p class="text-sm" style="margin-left: 5px;" *ngSwitchCase="'Employee'">Employee</p>
+                                                    <p class="text-sm" style="margin-left: 5px;" *ngSwitchCase="'serviceLeader'"> Service Manager</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Service</label>
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{service.name}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

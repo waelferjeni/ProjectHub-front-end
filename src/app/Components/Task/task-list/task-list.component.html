@@ -1,0 +1,507 @@
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="/home">
+                <img src="../assets/img/pgh-logo.png" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold">Poulina Group Holding</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="  w-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <ng-container *ngIf="role==='Employee'">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/timesheet">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">TimeSheet</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/tasks">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-check-circle-fill text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Tasks</span>
+                    </a>
+                </li>
+                <ng-container *ngIf="role !=='independentEmployee'">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/userstories">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-bookmark-fill text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">User Stories</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  " href="/sprints">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-clock-history text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Sprints</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/projects">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-folder-17 text-success text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Projects</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="role==='serviceLeader' || role==='Admin'">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/teams">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-microsoft-teams text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Teams</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="role === 'Admin'">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/services">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Services</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/users">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-people-fill text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Users</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <hr class="horizontal dark mt-0">
+
+                <li class="nav-item" style=" cursor: pointer;">
+                    <a (click)="logOut()" class="nav-link ">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-box-arrow-left text-danger text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <main class="main-content position-relative border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <h6 class="font-weight-bolder text-white mb-0">Tasks</h6>
+                    </ol>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                        </div>
+                    </div>
+                    <ul class="navbar-nav  justify-content-end">
+                        <li class="nav-item d-flex align-items-center text-white font-weight-bold px-0">
+
+                            <i class="fa fa-user me-sm-1"></i>
+                            <span class="d-sm-inline d-none">{{fullName}}</span>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--End Nav-bar-->
+        <div class="container-fluid py-4">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0 p-3">
+                            <div class="row">
+                                <div class="col-6 d-flex align-items-center">
+                                    <h6 class="mb-0">Tasks</h6>
+                                </div>
+                                <div class="col-6 text-end float-end" style="width: 15%; margin-left:400px">
+
+
+                                    <ng-container *ngIf="role!=='independentEmployee'">
+                                        <select (change)="selectProject($event)" class="form-select" aria-label="Default select example" style="background-color:#5e72e4; color:white; arrow-color:white;" form-select-border-color="#fc5a8d">
+                                                <option [disabled]="true" >Select project</option>
+                                                <option *ngFor="let Project of Projects" value="{{Project.id}}" >{{Project.name}}</option>
+                                              </select>
+                                    </ng-container>
+                                    <ng-container *ngIf="role!=='independentEmployee'">
+                                        <select (change)="selectTaskState($event)" class="form-select" aria-label="Default select example" style="background-color:#5e72e4; color:white; arrow-color:white;margin-top: 3px;" form-select-border-color="#fc5a8d">
+                            <option [disabled]="true">Select State</option>
+                            <option value="0">Pending</option>
+                            <option value="1">To Do</option>
+                            <option value="2">In Progress</option>
+                            <option value="3">Done</option>
+                            <option value="4">Validated</option>
+                            <option value="5">All Tasks</option>
+                        </select>
+                                    </ng-container>
+                                    <ng-container *ngIf="role==='independentEmployee'">
+                                        <select (change)="selectState($event)" class="form-select" aria-label="Default select example" style="background-color:#5e72e4; color:white; arrow-color:white" form-select-border-color="#fc5a8d">
+                            <option selected disabled>Select State</option>
+                            <option value="1">In Progress</option>
+                            <option value="2">Done</option>
+                            <option value="3">Validated</option>
+                        </select>
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf=" role==='Employee'">
+                                        <button class="btn btn-primary btn-sm mb-0 w-100" href="" type="button" style="margin-top: 20px; " data-bs-toggle="modal" data-bs-target="#exampleModal">Add Task</button>
+                                    </ng-container>
+                                    <ng-container *ngIf="role==='independentEmployee'">
+                                        <button class="btn btn-primary btn-sm mb-0 w-100" type="button" style="margin-top: 20px; " data-bs-toggle="modal" data-bs-target="#addProject">Add Task</button>
+                                    </ng-container>
+                                </div>
+
+                            </div>
+                        </div>
+                        <ng-container *ngIf="role !=='independentEmployee'">
+                            <div class="card-header pb-0">
+                                <h6>View Tasks</h6>
+
+                            </div>
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Current State</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estimated Duration</th>
+                                                <th class="text-secondary opacity-7"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let task of tasks">
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0" style="margin-left: 20px;"> {{task.name}} </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0"> {{task.description}} </p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm" [ngSwitch]="task.taskState">
+                                                    <span class="badge badge-sm bg-gradient-secondary" *ngSwitchCase="0"> Pending </span>
+                                                    <span class="badge badge-sm bg-gradient-danger" *ngSwitchCase="1"> To Do  </span>
+                                                    <span class="badge badge-sm bg-gradient-warning" *ngSwitchCase="2"> In Progress </span>
+                                                    <span class="badge badge-sm bg-gradient-info" *ngSwitchCase="3"> Done </span>
+                                                    <span class="badge badge-sm bg-gradient-success" *ngSwitchCase="4"> Validated </span>
+                                                </td>
+                                                <td class="align-middle text-center">
+
+                                                    <span class="text-secondary text-xs font-weight-bold"> {{estimatedDurationConversion(task.estimatedDuration)}}  </span>
+
+                                                </td>
+                                                <td>
+                                                    <div class="ms-auto text-end">
+                                                        <a class="btn btn-link text-primary px-3 mb-0" href="javascript:;" data-bs-dismiss="modal" aria-label="Close" type="button" data-bs-toggle="modal" (click)="moreDetails(task)"><i class="bi bi-eye text-primary me-2" aria-hidden="true"></i>More Details</a>
+                                                        <ng-container *ngIf="role ==='Employee'">
+                                                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" type="button" data-bs-toggle="modal" (click)="editDialog(task)"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true" ></i>Edit</a>
+                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" type="submit" (click)="deleteTask(task)"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                        </ng-container>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="role ==='independentEmployee'">
+                            <div class="card-header pb-0">
+                                <h6>View Tasks</h6>
+
+                            </div>
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Current State</th>
+                                                <th class="text-secondary opacity-7"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let project of projects">
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0" style="margin-left: 20px;"> {{project.name}} </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0"> {{project.description}} </p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm" [ngSwitch]="project.projectState">
+                                                    <span class="badge badge-sm bg-gradient-danger" *ngSwitchCase="0"> To Do  </span>
+                                                    <span class="badge badge-sm bg-gradient-warning" *ngSwitchCase="1"> In Progress </span>
+                                                    <span class="badge badge-sm bg-gradient-info" *ngSwitchCase="2"> Done </span>
+                                                    <span class="badge badge-sm bg-gradient-success" *ngSwitchCase="3"> Validated </span>
+                                                </td>
+                                                <td>
+                                                    <div class="ms-auto text-end">
+                                                        <a class="btn btn-link text-primary px-3 mb-0" data-bs-dismiss="modal" aria-label="Close" type="button" data-bs-toggle="modal" (click)="Details(project)"><i class="bi bi-eye text-primary me-2" aria-hidden="true"></i>More Details</a>
+                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" type="submit" (click)="Delete(project)"><i class="far fa-trash-alt me-2"></i>Delete</a>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- Modal Add Task -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form [formGroup]="addTask" (ngSubmit)="onSubmit()">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid py-4">
+                            <div class="row">
+                                <div class=" justify-content-center">
+                                    <div class="card ">
+                                        <div class="card-header pb-0">
+                                            <div class="align-items-center">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="example-text-input" class="form-control-label">Project</label>
+                                                            <select (change)="chooseProject($event)" class="form-select ms-auto" aria-label="Default select example" formControlName="project">
+                                                                    <option selected [disabled]="true">Select project</option>
+                                                                    <option *ngFor="let project of Projects" value="{{project.id}}">{{project.name}}</option>
+                                                                    </select>
+                                                            <div *ngIf="f['project'].touched && f['project'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                <div style="margin-left: 150px;" *ngIf="f['project'].errors!['required']">* Please select a Project.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="example-text-input" class="form-control-label">User Story</label>
+                                                            <select (change)="chooseUserStory($event)" formControlName="userStory" class="form-select ms-auto" aria-label="Default select example">
+                                                            <option selected Disabled>Select user story</option>
+                                                            <option *ngFor="let userStory of userStories" value="{{userStory.id}}">{{userStory.name}}</option>
+                                                          </select>
+
+                                                            <div *ngIf="f['userStory'].touched && f['userStory'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                <div style="margin-left: 170px;" *ngIf="f['userStory'].errors!['required']">* This field is required.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Task Name</label>
+                                                        <input formControlName="taskName" class="form-control" type="text">
+                                                        <div *ngIf="f['taskName'].touched && f['taskName'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f['taskName'].errors!['required']">* This field is required.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Complexity</label>
+                                                        <select class="form-select ms-auto" aria-label="Default select example" formControlName="complexity">
+                                                        <option value="0" >Easy</option>
+                                                        <option value="1" >Medium</option>
+                                                        <option value="2" >Hard</option>
+                                                    </select>
+                                                        <div *ngIf="f['complexity'].touched && f['complexity'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f['complexity'].errors!['required']">* Please select a Complexity.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <p class="text-uppercase text-sm">Estimated Duration</p>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Days</label>
+                                                        <input formControlName="days" class="form-control" type="number" value="0" min="0">
+                                                        <div *ngIf="f['days'].touched && f['days'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f['days'].errors!['required']" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">* This field is required.</div>
+                                                        </div>
+                                                        <div *ngIf="f['days'].errors!['min']" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">* Please enter a value greater than or equal to 0.</div>
+
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Hours</label>
+                                                        <input formControlName="hours" class="form-control" type="number" value="0" min="0" max="23">
+                                                        <div *ngIf="f['hours'].touched && f['hours'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f['hours'].errors!['required']" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">* This field is required.</div>
+                                                        </div>
+                                                        <div *ngIf="f['hours'].errors!['max'] || f['hours'].errors!['min'] " class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">* Please enter a value between 0 and 23.</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="horizontal dark">
+                                            <p class="text-uppercase text-sm">Description </p>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Description </label>
+                                                        <input formControlName="description" class="form-control" type="text" value="">
+                                                        <div *ngIf="f['description'].touched && f['description'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f['description'].errors!['required']">* This field is required.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- End Modal -->
+    <!-- Modal Add Project -->
+    <div style="margin: 15px;" class="modal fade" id="addProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+                </div>
+                <form [formGroup]="addProject" (ngSubmit)="submit()">
+                    <div class="modal-body">
+                        <div class="container-fluid py-4">
+                            <div class="row">
+                                <div class=" justify-content-center">
+                                    <div class="card ">
+
+
+                                        <div class="card-body">
+                                            <p class="text-uppercase text-sm">General Information</p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Name</label>
+                                                        <input formControlName="name" class="form-control" type="text">
+                                                        <div *ngIf="f2['name'].touched && f2['name'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f2['name'].errors!['required']">* This field is required.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Client Name</label>
+                                                        <input formControlName="clientName" class="form-control" type="text">
+                                                        <div *ngIf="f2['clientName'].touched && f2['clientName'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f2['clientName'].errors!['required']">* This field is required.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <hr class="horizontal dark">
+                                            <p class="text-uppercase text-sm">Estimated Duration</p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Days</label>
+                                                        <input class="form-control" formControlName="days" type="number" value="0" min="0">
+                                                        <div *ngIf="f2['days'].touched && f2['days'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f2['days'].errors!['required']">* This field is required.</div>
+                                                            <div *ngIf="f2['days'].errors!['min'] ">* Please enter a value greater than or equal to 0.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="example-text-input" class="form-control-label">Hours</label>
+                                                        <input class="form-control" formControlName="hours" type="number" value="0" min="0" max="23">
+                                                        <div *ngIf="f2['hours'].touched && f2['hours'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f2['hours'].errors!['required']">* This field is required.</div>
+                                                            <div *ngIf="f2['hours'].errors!['max']">* Please enter a value between 0 and 23.</div>
+                                                            <div *ngIf="f['hours'].errors!['min'] ">* Please enter a value between 0 and 23.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <hr class="horizontal dark">
+                                            <p class="text-uppercase text-sm">Description </p>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" value="" formControlName="description">
+                                                        <div *ngIf="f2['description'].touched && f2['description'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            <div *ngIf="f2['description'].errors!['required']">* This field is required.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal">Close</button>
+                        <button type="submit" [disabled]="!addProject.valid" class="btn btn-primary">Confirm </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+</body>

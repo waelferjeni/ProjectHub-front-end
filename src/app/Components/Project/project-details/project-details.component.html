@@ -1,0 +1,149 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ng-container *ngIf="role==='serviceLeader'||role==='Admin'">
+                    <h5 class="modal-title" id="exampleModalLabel"> Project Details</h5>
+                </ng-container>
+                <ng-container *ngIf="role==='independentEmployee'">
+                    <h5 class="modal-title" id="exampleModalLabel"> Task Details</h5>
+                </ng-container>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid py-4">
+                    <div class="row">
+                        <div class=" justify-content-center">
+                            <div class="card ">
+                                <div class="card-header pb-0">
+                                    <ng-container *ngIf="role ==='Employee'">
+                                        <div class="d-flex align-items-center">
+                                            <button [disabled]="(project.projectState==3 ||isFinished==false ||project.projectState==2)" class="btn btn-warning btn-sm ms-auto" (click)="finish()">Finish Project</button>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="role ==='independentEmployee'">
+                                        <div class="d-flex align-items-center">
+                                            <button [disabled]="(project.projectState==3||project.projectState==2)" class="btn btn-warning btn-sm ms-auto" (click)="finish()">Finish Task</button>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="role==='serviceLeader'">
+
+                                        <ng-container *ngIf="project.projectState == 0">
+                                            <div class="d-flex align-items-center">
+                                                <button class="btn btn-primary btn-sm ms-auto" (click)="start()">Start Project</button>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="project.projectState != 0">
+                                            <div class="d-flex align-items-center">
+                                                <button [disabled]="(project.projectState!=2)" class="btn btn-success btn-sm ms-auto" (click)="validate()">Validate Project</button>
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Name</label>
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{project.name}} </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Client</label>
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{project.clientName}} </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Service </label>
+                                                <p class=" text-sm" style="margin-left: 5px;"> {{project.service.name}} </p>
+                                            </div>
+                                        </div>
+                                        <hr class="horizontal dark">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Estimated Duration</label>
+                                                    <p class=" text-sm" style="margin-left: 5px;"> {{estimatedDurationConversion(project.estimatedDuration)}} </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Real Duration</label>
+                                                    <p class=" text-sm">
+                                                        {{getDateDiff(project.startDate,project.endDate)}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Current State</label>
+                                                    <div class="align-middle text-center text-sm" [ngSwitch]="project.projectState" style="margin-right: 100px;">
+                                                        <span class="badge badge-sm bg-gradient-danger" *ngSwitchCase="0"> To Do </span>
+                                                        <span class="badge badge-sm bg-gradient-primary" *ngSwitchCase="1"> In Progress </span>
+                                                        <span class="badge badge-sm bg-gradient-info" *ngSwitchCase="2"> Done </span>
+                                                        <span class="badge badge-sm bg-gradient-success" *ngSwitchCase="3"> Validated </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="horizontal dark">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Start Date</label>
+                                                    <p class=" text-sm" style="margin-left: 5px;"> {{ project.startDate| date:'yyyy-MM-dd HH:mm:ss' }} </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">End Date </label>
+                                                    <p class=" text-sm" style="margin-left: 5px;"> {{ project.endDate| date:'yyyy-MM-dd HH:mm:ss' }} </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label for="example-text-input" class="form-control-label">Sprints</label>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group" *ngFor="let sprint of project.sprints" (click)="sprintDetails(sprint)">
+                                                    <input style="margin-left: 5px;" disabled type="checkbox" value="{{sprint.id}}" id="sprint" [checked]="checkSprintState(sprint)">
+                                                    <label class="form-check-label" for="sprint">
+                                                    {{sprint.name}}
+                                                 </label><br>
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <hr class="horizontal dark">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Description </label>
+                                                    <P style="margin-left: 5px;" class=" text-sm">{{project.description}}</P>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

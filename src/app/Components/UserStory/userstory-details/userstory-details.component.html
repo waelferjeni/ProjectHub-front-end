@@ -1,0 +1,101 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Userstory Details</h5>
+
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid py-4">
+                    <div class="row">
+                        <div class=" justify-content-center">
+                            <div class="card ">
+                                <div class="card-header pb-0">
+                                    <div class="d-flex align-items-center">
+
+                                        <ng-container *ngIf="role ==='serviceLeader'"> <button class="btn btn-success btn-sm ms-auto" (click)="validate()" [disabled]="(userstory.userStoryState===2||isFinished==false)">Validate Userstory</button></ng-container>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Name</label>
+                                                <p class=" text-sm"> {{userstory.name}} </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Project</label>
+
+                                                <p class=" text-sm"> {{userstory.project.name}}</p>
+
+                                            </div>
+                                        </div>
+
+                                        <hr class="horizontal dark">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Current State</label>
+                                                    <div class="align-middle text-center text-sm" [ngSwitch]="userstory.userStoryState" style="margin-right: 120px;">
+                                                        <span class="badge badge-sm bg-gradient-danger" *ngSwitchCase="0"> To Do </span>
+                                                        <span class="badge badge-sm bg-gradient-primary" *ngSwitchCase="1"> In Progress </span>
+                                                        <span class="badge badge-sm bg-gradient-info" *ngSwitchCase="2"> Done </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Estimated Duration</label>
+                                                    <p class=" text-sm"> {{estimatedDurationConversion(userstory.estimatedDuration)}} </p>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">Tasks</p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+
+                                                    <div class="my-auto" *ngFor="let task of userstory.tasks">
+                                                        <input style="margin-left: 5px;" disabled type="checkbox" value="{{task.id}}" id="sprint" [checked]="checkTaskState(task)">
+                                                        <label class="form-check-label" for="sprint">
+                                                    {{task.name}}
+                                             </label><br>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <hr class="horizontal dark">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Description </label>
+                                                    <p class=" text-sm" style="margin-left: 5px;"> {{userstory.description}} </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-right: 5px;">
+                    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>

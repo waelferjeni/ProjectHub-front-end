@@ -1,0 +1,122 @@
+<div style="margin: 15px;">
+    <form [formGroup]="editTask" (ngSubmit)="submit()">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class=" justify-content-center">
+                                <div class="card ">
+
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">General Information</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="example-text-input" class="form-control-label">Name</label>
+                                                    <input class="form-control" type="text" formControlName="taskName">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Current State</label>
+                                                    <select class="form-select ms-auto" aria-label="Default select example" formControlName="taskState">
+                                                        <option value="0">Pending</option>
+                                                        <option  value="1" > To Do </option>
+                                                        <option  value="2" > In Progress </option>
+                                                        <option  value="3" > Done </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Project</label>
+                                                    <select (change)="chooseProject($event)" class="form-select ms-auto" aria-label="Default select example" formControlName="project" style="background-color:#344767; color:white; arrow-color:white; " form-select-border-color="#fc5a8d">
+                                                        <option value="0">remove Project</option>
+                                                        <option *ngFor="let project of Projects" value="{{project.id}}">{{project.name}}</option>
+                                                        </select>
+                                                    <div *ngIf="f['project'].touched && f['project'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div style="margin-left: 150px;" *ngIf="f['project'].errors!['required']">* Please select a Project.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">User Story</label>
+                                                    <select (change)="chooseUserStory($event)" formControlName="userStory" class="form-select ms-auto" aria-label="Default select example" style="background-color:#63B3ED; color:white; arrow-color:white; " form-select-border-color="#fc5a8d">
+                                                        <option value="0">remove UserStory</option>
+                                                        <option *ngFor="let userStory of userStories" value="{{userStory.id}}">{{userStory.name}}</option>
+                                                      </select>
+                                                    <div *ngIf="f['userStory'].touched && f['userStory'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                        <div style="margin-left: 170px;" *ngIf="f['userStory'].errors!['required']">* This field is required.</div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                        </div>
+                                        <!-- <hr class="horizontal dark"> -->
+
+                                        <!-- <p class="text-uppercase text-sm">Estimated Duration</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Days</label>
+                                                    <input class="form-control" type="number" min="0" formControlName="days">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Hours</label>
+                                                    <input class="form-control" type="number" max="23" min="0" formControlName="hours">
+                                                </div>
+                                            </div>
+
+                                        </div> -->
+                                        <!-- <hr class="horizontal dark"> -->
+
+                                        <!-- <p class="text-uppercase text-sm">Dates</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Start Date</label>
+                                                    <input class="form-control" type="datetime-local" formControlName="startDate">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">End Date </label>
+                                                    <input class="form-control" type="datetime-local" formControlName="endDate">
+                                                </div>
+                                            </div>
+
+                                        </div> -->
+                                        <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">Description </p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Description </label>
+                                                    <input class="form-control" type="text" formControlName="description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style="margin: 7px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">Close</button>
+                    <button style="margin: 7px;" type="submit" class="btn btn-primary" [disabled]="!editTask.valid">Confirm </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

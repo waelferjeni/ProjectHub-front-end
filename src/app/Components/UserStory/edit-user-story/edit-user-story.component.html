@@ -1,0 +1,68 @@
+<div style="margin:15px">
+    <form [formGroup]="editForm" (ngSubmit)="submit()">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit User Story</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class=" justify-content-center">
+                                <div class="card ">
+
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">General Information</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="example-text-input" class="form-control-label">Name</label>
+                                                    <input class="form-control" type="text" formControlName="name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="horizontal dark">
+
+                                        <p class="text-uppercase text-sm">Estimated Duration</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Days</label>
+                                                    <input class="form-control" type="number" min="0" formControlName="estimatedDays">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Hours</label>
+                                                    <input class="form-control" type="number" max="23" min="0" formControlName="estimatedHours">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="horizontal dark">
+                                        <p class="text-uppercase text-sm">Description </p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Description </label>
+                                                    <input class="form-control" type="text" formControlName="description" [(ngModel)]="userstory.description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+                    <button style="margin-left: 5px;" type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Confirm </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

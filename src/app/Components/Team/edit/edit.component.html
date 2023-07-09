@@ -1,0 +1,64 @@
+<div style="margin: 15px;">
+    <form [formGroup]="editTeam" (ngSubmit)="onSubmit()">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Team</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class="justify-content-center">
+                                <div class="card">
+                                    <div class="card-header pb-0">
+                                        <div class="d-flex align-items-center">
+                                            <p class="mb-0">Edit Team</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">Team Name</p>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input formControlName="teamName" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-uppercase text-sm">Edit Project Leader</p>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <select formControlName="ProjectLeader" class="form-select ms-auto" aria-label="Default select example" form-select-border-color="#fc5a8d" Disabled>
+                                <option *ngFor="let User of users" value="{{User.id}}"  
+                                >
+                                  {{User.userName}}
+                                </option>
+                              </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button style="margin: 7px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">
+              Close
+            </button>
+                        <button style="margin: 7px;" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditAffectationUsers" [disabled]="editTeam.invalid">
+              Next
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

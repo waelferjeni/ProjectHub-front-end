@@ -1,0 +1,363 @@
+<ng-container *ngIf="role !=='independentEmployee'">
+
+    <body class="g-sidenav-show   bg-gray-100">
+        <div class="min-height-300 bg-primary position-absolute w-100"></div>
+        <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+            <div class="sidenav-header">
+                <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+                <a class="navbar-brand m-0" href="/home">
+                    <img src="../assets/img/pgh-logo.png" class="navbar-brand-img h-100" alt="main_logo">
+                    <span class="ms-1 font-weight-bold">Poulina Group Holding</span>
+                </a>
+            </div>
+            <hr class="horizontal dark mt-0">
+            <div class="  w-auto " id="sidenav-collapse-main">
+                <ul class="navbar-nav">
+                    <ng-container *ngIf="role==='Employee'">
+
+                        <li class="nav-item">
+                            <a class="nav-link " href="/timesheet">
+                                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">TimeSheet</span>
+                            </a>
+                        </li>
+                    </ng-container>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/tasks">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-check-circle-fill text-success text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Tasks</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/userstories">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-bookmark-fill text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">User Stories</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active " href="/sprints">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-clock-history text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Sprints</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="/projects">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-folder-17 text-success text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Projects</span>
+                        </a>
+                    </li>
+                    <ng-container *ngIf="role==='serviceLeader'||role==='Admin'">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/teams">
+                                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-microsoft-teams text-info text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Teams</span>
+                            </a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="role === 'Admin'">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/services">
+                                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Services</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/users">
+                                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-people-fill text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Users</span>
+                            </a>
+                        </li>
+                    </ng-container>
+                    <hr class="horizontal dark mt-0">
+                    <li class="nav-item" style=" cursor: pointer;">
+                        <a (click)="logOut()" class="nav-link ">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-box-arrow-left text-danger text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main-content position-relative border-radius-lg ">
+            <!-- Navbar -->
+            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+                <div class="container-fluid py-1 px-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                            <h6 class="font-weight-bolder text-white mb-0">Sprints</h6>
+                        </ol>
+                    </nav>
+                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                            <div class="input-group">
+                            </div>
+                        </div>
+                        <ul class="navbar-nav  justify-content-end">
+                            <li class="nav-item d-flex align-items-center text-white font-weight-bold px-0">
+
+                                <i class="fa fa-user me-sm-1"></i>
+                                <span class="d-sm-inline d-none">{{fullName}}</span>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--End Nav-bar-->
+            <div class="container-fluid py-4">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header pb-0 p-3">
+                                <div class="row">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <h6 class="mb-0">Sprints</h6>
+                                    </div>
+                                    <div class="col-6 text-end float-end" style="width: 15%; margin-left:400px">
+
+
+
+                                        <select (change)="selectProject($event)" class="form-select" aria-label="Default select example" style="background-color:#5e72e4; color:white; arrow-color:white;width: 150px;" form-select-border-color="#fc5a8d">
+                            <option [disabled]="true" >Select project</option>
+                            <option *ngFor="let Project of Projects" value="{{Project.id}}" >{{Project.name}}</option>
+                          </select>
+                                        <ng-container *ngIf="role !=='serviceLeader' && role!=='Admin'">
+                                            <button class="btn btn-primary btn-sm mb-0 w-100" href="" type="button" style="margin-top: 20px; " data-bs-toggle="modal" data-bs-target="#exampleModal">Add Sprint</button>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-header pb-0">
+                                <h6>View Sprints</h6>
+                            </div>
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Current State</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Estimated Duration</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Project</th>
+                                                <th class="text-secondary opacity-7"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let sprint of sprints">
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0"> {{sprint.name.substring(0,13)}} </p>
+                                                </td>
+                                                <td>
+                                                    <p style="margin-left: 5px;" class="text-xs font-weight-bold mb-0"> {{sprint.description.substring(0,13)}} </p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm" [ngSwitch]="sprint.sprintState">
+                                                    <span class="badge badge-sm bg-gradient-danger" *ngSwitchCase="0"> To Do </span>
+                                                    <span class="badge badge-sm bg-gradient-primary" *ngSwitchCase="1"> In Progress </span>
+                                                    <span class="badge badge-sm bg-gradient-info" *ngSwitchCase="2"> Done </span>
+                                                    <span class="badge badge-sm bg-gradient-success" *ngSwitchCase="3"> Validated </span>
+                                                </td>
+                                                <td class="align-middle text-center">
+
+                                                    <span class="text-secondary text-xs font-weight-bold"> {{estimatedDurationConversion(sprint.estimatedDuration)}}  </span>
+
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span style="margin-left: 20px;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                {{sprint.project.name.substring(0,13)}}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <div class="ms-auto text-end">
+                                                        <a class="btn btn-link text-primary px-3 mb-0" href="javascript:;" data-bs-dismiss="modal" aria-label="Close" type="button" data-bs-toggle="modal" (click)="moreDetails(sprint)"><i class="bi bi-eye text-primary me-2" aria-hidden="true"></i>More Details</a>
+                                                        <ng-container *ngIf="role ==='Employee'">
+                                                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" type="button" data-bs-toggle="modal" (click)="editDialog(sprint)"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true" ></i>Edit</a>
+                                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" type="submit" (click)="deleteSprint(sprint)"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                        </ng-container>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Modal Add Sprint -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form [formGroup]="addSprint" (ngSubmit)="onSubmit()">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Sprint</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid py-4">
+                                <div class="row">
+                                    <div class=" justify-content-center">
+                                        <div class="card ">
+                                            <div class="card-header pb-0">
+                                                <div class="d-flex align-items-center">
+
+                                                    <div class="col-md-6">
+                                                        <p class="text-uppercase text-sm">Project</p>
+
+                                                        <div class="form-group">
+                                                            <select formControlName="projectId" class="form-select ms-auto" aria-label="Default select example">
+                          <option [disabled]="true" >Select project</option>
+                          
+                          <option *ngFor="let Project of Projects" value="{{Project.id}}">{{Project.name}}</option>
+                        </select>
+
+                                                            <div *ngIf="f['projectId'].touched && f['projectId'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                <div *ngIf="f['projectId'].errors!['required']">* This field is required.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="margin-left: 10px;" class="col-md-6">
+                                                        <p class="text-uppercase text-sm">Sprint Name</p>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <input formControlName="name" class="form-control" type="text">
+                                                                <div *ngIf="f['name'].touched && f['name'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                    <div *ngIf="f['name'].errors!['required']">* This field is required.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <p class="text-uppercase text-sm">Estimated Duration</p>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="example-text-input" class="form-control-label">Days</label>
+                                                            <input formControlName="days" class="form-control" type="number" min="7" max="15">
+                                                            <div *ngIf="f['days'].touched && f['days'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                <div *ngIf="f['days'].errors!['required']">* This field is required.</div>
+                                                                <div *ngIf="f['days'].errors!['max'] || f['days'].errors!['min'] ">* Please enter a value between 7 and 15.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr class="horizontal dark">
+                                                <p class="text-uppercase text-sm">Description </p>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="example-text-input" class="form-control-label">Description </label>
+                                                            <input formControlName="description" class="form-control" type="text" value="">
+                                                            <div *ngIf="f['description'].touched && f['description'].invalid" class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                <div *ngIf="f['description'].errors!['required']">* This field is required.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForms()">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="addSprint.invalid">Next</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <!-- End Modal -->
+
+    </body>
+</ng-container>
+<ng-container *ngIf="role ==='independentEmployee'">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <div class="container py-10" style="width: 1000px;">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div style="text-align: center;font-size: 400px;">
+                                <h6 style="text-align: center;font-size: 100px;" class="mb-0">403 FORBIDDEN</h6>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <div class="table align-items-center mb-0">
+
+
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Sorry, your access is refused due to security reasons of our server and also our sensitive data. </th>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Please go back to the previous page to continue browsing</th>
+                                </tr>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+
+                            <div class="col-6 text-end float-end" style="width: 15%; margin-left:400px">
+
+
+                                <a class="btn btn-primary btn-m  " href="javascript:history.back()" type="button" style="margin-top: 20px;width: 100px; ">Go Back</a>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-container>

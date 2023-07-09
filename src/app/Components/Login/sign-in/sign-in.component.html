@@ -1,0 +1,55 @@
+<body>
+
+    <main class="main-content  mt-0">
+        <section>
+            <div class="page-header min-vh-100">
+                <div class="container">
+                    <div class="row">
+                        <form [formGroup]="loginForm">
+                            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+                                <div class="card card-plain">
+                                    <div class="card-header pb-0 text-start">
+                                        <h4 class="font-weight-bolder">Sign In</h4>
+                                        <p class="mb-0">Enter your username and password to sign in</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form role="form">
+                                            <div class="form-group pt-3">
+                                                <div class="input-field" [class.error]="loginForm.controls['userName'].dirty && loginForm.hasError('required','userName')">
+                                                    <span class="fa fa-user p-2"> </span>
+                                                    <input formControlName="userName" type="text" placeholder="Username">
+                                                </div>
+                                            </div>
+                                            <small *ngIf="loginForm.controls['userName'].dirty && loginForm.hasError('required','userName')" class="text-danger">*Username is required</small>
+                                            <div class="form-group pt-3">
+                                                <div class="input-field" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
+                                                    <span class="fa fa-lock p-2"> </span>
+                                                    <input formControlName="password" [type]="type" placeholder="Password">
+                                                    <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
+                                                </div>
+
+                                            </div>
+                                            <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is required</small>
+                                            <button (click)="onSubmit()" type="button" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                            <div class="position-relative  h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden">
+                                <span class="mask bg-gradient-primary opacity-8"></span>
+                                <h4 class="mt-5 text-white  position-relative"><img src="../assets/img/logo.png"></h4>
+                                <p class="text-white position-relative font-weight-bolder">Experience the ultimate productivity hub: Tasks, UserStories, Sprints, Projects, Dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+</body>

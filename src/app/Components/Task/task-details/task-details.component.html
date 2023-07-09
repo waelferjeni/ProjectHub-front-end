@@ -1,0 +1,115 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Task Details</h5>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid py-4">
+                    <div class="row">
+                        <div class=" justify-content-center">
+                            <div class="card ">
+
+                                <div class="card-body">
+                                    <p class="text-uppercase text-sm">General Information</p>
+                                    <ng-container *ngIf="role === 'Employee'">
+                                        <div class="d-flex align-items-center">
+                                            <button [disabled]="(task.taskState!=3)" class="btn btn-success btn-sm ms-auto" (click)="Validate()">Validate Task</button>
+                                        </div>
+                                    </ng-container>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <label for="example-text-input" class="form-control-label">Name</label>
+                                                <p class=" text-sm"> {{task.name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <label for="example-text-input" class="form-control-label">Employee</label>
+                                                <ng-container *ngIf="task.employeeId!='00000000-0000-0000-0000-000000000000'">
+                                                    <p class=" text-sm"> {{task.employee.userName}}</p>
+                                                </ng-container>
+                                                <ng-container *ngIf="task.employeeId=='00000000-0000-0000-0000-000000000000'">
+
+                                                </ng-container>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Current State</label>
+                                                <div class="align-middle text-center text-sm" [ngSwitch]="task.taskState" style="margin-right: 120px;">
+                                                    <span class="badge badge-sm bg-gradient-secondary" *ngSwitchCase="0"> Pending </span>
+                                                    <span class="badge badge-sm bg-gradient-danger" *ngSwitchCase="1"> To Do </span>
+                                                    <span class="badge badge-sm bg-gradient-warning" *ngSwitchCase="2"> In Progress </span>
+                                                    <span class="badge badge-sm bg-gradient-info" *ngSwitchCase="3"> Done </span>
+                                                    <span class="badge badge-sm bg-gradient-success" *ngSwitchCase="4"> Validated </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">User Story</label>
+                                                <p class=" text-sm"> {{task.userStory.name}}</p>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr class="horizontal dark">
+
+                                    <p class="text-uppercase text-sm">Dates</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+                                            <label for="example-text-input" class="form-control-label">Estimated Duration</label>
+                                            <p class=" text-sm"> {{estimatedDurationConversion(task.estimatedDuration)}} </p>
+
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Start Date</label>
+                                                <p class=" text-sm"> {{task.startDate| date:'yyyy-MM-dd HH:mm:ss'}} </p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">End Date </label>
+                                                <p class=" text-sm"> {{task.endDate| date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <hr class="horizontal dark">
+                                    <p class="text-uppercase text-sm">Description </p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Description </label>
+                                                <p class=" text-sm"> {{task.description}} </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin: 7px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

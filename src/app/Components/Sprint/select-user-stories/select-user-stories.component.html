@@ -1,0 +1,60 @@
+<div style="margin: 15px;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assign UserStories</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid py-4">
+                    <div class="row">
+                        <div class="justify-content-center">
+                            <div class="card">
+                                <div class="card-header pb-0">
+                                    <div class="d-flex align-items-center">
+
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="text-uppercase text-sm">Select UserStories</p>
+                                    <div *ngFor="let userStory of userStories">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input type="checkbox" [value]="userStory.id" (change)="selectUserStory($event,userStory)" />
+                                                    <label class="form-check-label" for="UserStory">
+                             {{ userStory.name }} </label
+                           ><br />
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <button
+           type="button"
+           class="btn btn-secondary"
+           data-bs-dismiss="modal"
+           (click)="close()"
+         >
+           Close
+         </button>
+         <button
+           type="submit"
+           class="btn btn-primary"
+           [disabled]="checkDuration"
+           (click)="onAssign()"
+         >
+           Confirm
+         </button>
+       </div>
+     </div>
+   </div>
+   </div>
+</div>
+<!-- End Modal -->
